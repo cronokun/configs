@@ -1,0 +1,49 @@
+" vim: fdm=marker foldlevel=0 foldenable
+  
+" Fonts and Colors {{{
+" set guifont=Source\ Code\ Pro:h12
+set guifont=SF\ Mono\ Regular:h12
+set linespace=1
+set antialias
+set background=dark
+colorscheme desert
+AirlineTheme base16color
+" set transparency=2
+" set blur=10
+" }}}
+
+" UI {{{
+set guioptions=gm
+set noballooneval
+set shortmess+=I  " clean window on startup
+set columns=128
+set lines=47
+" }}}
+
+" Kyebindings {{{
+nmap <D-Left> <C-w>h
+nmap <D-Down> <C-w>j
+nmap <D-Up> <C-w>k
+nmap <D-Right> <C-w>l
+nmap <D-S-Up> <C-w>k<C-w>_
+nmap <D-S-Down> <C-w>j<C-w>_
+
+" Quick tab access
+map <D-1> :tabnext 1<CR>
+map <D-2> :tabnext 2<CR>
+map <D-3> :tabnext 3<CR>
+map <D-4> :tabnext 4<CR>
+map <D-5> :tabnext 5<CR>
+map <D-6> :tabnext 6<CR>
+map <D-7> :tabnext 7<CR>
+map <D-8> :tabnext 8<CR>
+map <D-9> :tabnext 9<CR>
+map <D-0> :tabnext 10<CR>
+" }}}
+
+
+" Hacks, etc {{{
+" Reload syntax highlighting when changinh color scheme:
+autocmd ColorScheme * syntax off | syntax on
+highlight Todo gui=bold
+" }}}

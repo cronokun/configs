@@ -1,0 +1,129 @@
+" vim: syntax=vim foldmethod=marker foldlevel=0 foldenable
+
+" ---- Manage Plugins {{{
+
+" General:
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'ervandew/supertab'
+
+" UI and Colors:
+Plug 'kristijanhusak/vim-hybrid-material'
+"Plug 'altercation/vim-colors-solarized'
+"Plug 'w0ng/vim-hybrid'
+"Plug 'jpo/vim-railscasts-theme'
+
+" Commands and Usefull stuff:
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-ragtag'
+Plug 'kana/vim-textobj-user'
+Plug 'nelstrom/vim-textobj-rubyblock'
+Plug 'tomtom/tcomment_vim'
+
+" Integrations:
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'rking/ag.vim'
+Plug 'Chun-Yang/vim-action-ag'
+
+" Language Specific:
+Plug 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-rails'
+Plug 'pangloss/vim-javascript'
+
+" etc:
+Plug 'junegunn/limelight.vim'
+Plug 'junegunn/goyo.vim'
+
+" }}}
+
+
+" ---- Configure Plugins {{{
+
+" Ag:
+set grepprg=ag\ --nogroup
+nmap <Leader>* <Plug>AgActionWord
+vmap <Leader>* <Plug>AgActionVisual
+
+" Airline:
+" 1. general settings
+let g:airline#extensions#hunks#enabled=0
+" 2. don't show any fancy symbold
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+let g:airline_left_sep           = ''
+let g:airline_left_alt_sep       = ''
+let g:airline_right_sep          = ''
+let g:airline_right_alt_sep      = ''
+let g:airline_symbols.branch     = ''
+let g:airline_symbols.readonly   = ''
+let g:airline_symbols.linenr     = ''
+" 3. use airline for tabline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#fnamemod = ':t'           " or full path - ':p:.'
+let g:airline#extensions#tabline#fnamecollapse = 0         " full dir names
+let g:airline#extensions#tabline#show_tab_nr = 0           " don't show tab number
+let g:airline#extensions#tabline#show_splits = 0
+let g:airline#extensions#tabline#show_buffers = 0
+let g:airline#extensions#tabline#buffer_min_count = 2
+let g:airline#extensions#tabline#tab_min_count = 2
+let g:airline#extensions#tabline#left_sep = ''
+let g:airline#extensions#tabline#left_alt_sep = ''
+let g:airline#extensions#tabline#right_sep = ''
+let g:airline#extensions#tabline#right_alt_sep = ''
+let g:airline#extensions#tabline#close_symbol = ''
+let g:airline#extensions#tabline#show_close_button = 0
+let g:airline#extensions#tabline#show_tab_type = 0
+
+" CtrlP:
+let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+let g:ctrlp_use_caching = 0  " ag is fast enough, don't cache
+let g:ctrlp_prompt_mappings = {
+  \ 'AcceptSelection("h")': ['<c-x>', '<c-s>'],
+  \ 'AcceptSelection("v")': ['<c-v>', '<c-cr>'],
+  \ }
+" custom mapping
+nmap <leader>b :CtrlPBuffer<CR>
+nmap <leader>p :CtrlP %:h<CR>
+nmap <leader>t :CtrlPBufTag<CR>
+nmap <leader>T :CtrlPTag<CR>
+nmap <leader>pc :CtrlP app/controllers<CR>
+nmap <leader>pj :CtrlP app/assets/javascripts<CR>
+nmap <leader>pm :CtrlP app/models<CR>
+nmap <leader>po :CtrlP app/concepts<CR>
+nmap <leader>pv :CtrlP app/views<CR>
+nmap <leader>ps :CtrlP spec/<CR>
+
+
+" GitGutter:
+highlight default link SignColumn LineNr
+let g:gitgutter_max_signs = 9999
+let g:gitgutter_sign_added = "│"
+let g:gitgutter_sign_modified = "│"
+let g:gitgutter_sign_removed = "▸"
+let g:gitgutter_sign_removed_first_line = '│'
+let g:gitgutter_sign_modified_removed = '▸'
+nmap ]h <Plug>GitGutterNextHunk
+nmap [h <Plug>GitGutterPrevHunk
+nmap <Leader>ha <Plug>GitGutterStageHunk
+nmap <Leader>hu <Plug>GitGutterUndoHunk
+
+" NERDTree:
+nmap <Leader>n :NERDTreeToggle<CR>
+nmap <Leader>c :NERDTreeFind<CR>
+
+" Ruby-specific:
+autocmd FileType ruby,eruby imap <C-CR>    <CR><CR>end<Esc>-cc
+autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1 
+autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
+autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
+
+" Distraction-free reading mode:
+command Reader Goyo
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
+
+" }}}

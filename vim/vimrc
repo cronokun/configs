@@ -1,0 +1,95 @@
+" vim: fdm=marker foldlevel=0 foldenable
+
+set nocompatible
+filetype plugin indent on
+runtime macros/matchit.vim
+
+" I.  Load Plugins
+call plug#begin('$XDG_CACHE_HOME/vim/plugins')
+source $XDG_CONFIG_HOME/vim/plugins
+call plug#end()
+
+" II.  Genereal Config
+
+" Spaces and Tabs {{{
+set expandtab
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
+" }}}
+
+" UI Config {{{
+set breakindent
+set breakindentopt=sbr
+set linebreak        " don't wrap long line in the middle of a word
+set listchars=tab:▸\ ,eol:¬,trail:∙
+set scrolloff=1      " show 1 extra line on top/bottom of the screen
+set showbreak=¶
+set showcmd          " dislpay incomplete commands
+set showmatch        " highlight matching [{()}]
+set splitbelow       " more natural vertical splits
+set splitright       " more natural horizontal splits
+set wildmenu
+set wildmode=full
+set winminheight=0   " allow split windows to get fully hidden
+" }}}
+
+" Searching {{{
+set hlsearch
+set ignorecase
+set incsearch
+nnoremap <silent> <leader><space> :nohlsearch<CR>
+" }}}
+
+" Folding {{{
+set foldenable
+set foldmethod=indent
+set foldlevelstart=10
+set foldnestmax=10
+" }}}
+
+" Behaviours {{{
+set autoread         " always load latest version if file was changed
+set noswapfile
+set timeoutlen=500
+set path+=**
+" set RU as alternative input source (Ctrl-^)
+set keymap=russian-jcukenmac
+set iminsert=0
+set imsearch=0
+" }}}
+
+" III. Customizations
+
+" Keybindings {{{
+" use space to get to command mode
+nmap <Space> :
+" insert new line above/below currend line while in insert mode
+imap <D-CR> <C-O>o
+imap <S-CR> <C-O>O
+" switch to previous buffer
+nnoremap <leader><leader> <C-^>
+" open tag in new tab
+nnoremap <silent><Leader><C-]> <C-w><C-]><C-w>T
+" move screen one line up/down
+nnoremap <silent><S-up> <C-y>
+nnoremap <silent><S-down> <C-e>
+imap <silent><S-up> <C-o><C-y>
+imap <silent><S-down> <C-o><C-e>
+vmap <silent><S-up> k
+vmap <silent><S-down> j
+" split window and show current file directory
+nmap <silent><leader>sp :sp %:h<CR>
+nmap <silent><leader>vs :vs %:h<CR>
+" quick move between Ag search resoults
+nmap <silent><leader>[ :cp<CR>
+nmap <silent><leader>] :cn<CR>
+" }}}
+
+" Commands {{{
+command Vimrc e ~/.config/vim/vimrc
+command Gvimrc e ~/.config/vim/gvimrc
+command! MakeTags !ctags -R .
+" }}}
+
+
