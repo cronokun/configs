@@ -1,0 +1,31 @@
+mpd_host = "volumio.local"
+mpd_port = "6600"
+
+ncmpcpp_directory = ~/.cache/ncmpcpp/
+lyrics_directory = ~/.cache/ncmpcpp/lyrics
+
+# General settings
+ignore_leading_the = "yes"
+media_library_primary_tag = "album_artist"
+mouse_support = "no"
+show_hidden_files_in_local_browser = "no"
+titles_visibility = "no"  # hide column titles
+
+# UI settings
+## default format:
+## song_columns_list_format = "(20)[yellow]{a} (6f)[green]{NEr} (50)[white]{t|f:Title} (20)[cyan]{b} (7f)[magenta]{lr}"
+song_columns_list_format = "(25)[yellow]{a} (3f)[green]{nEr} (40)[white]{t|f:Title} (25)[cyan]{b} (8f)[magenta]{lr}"
+progressbar_look = "-›·"
+progressbar_boldness = "no"
+user_interface = "alternative"
+
+# Colors
+main_window_color = "white"
+#main_window_highlight_color = "yellow"
+progressbar_color = "yellow"
+progressbar_elapsed_color = "yellow"
+#statusbar_color = "white"
+#active_column_color = "red"
+
+# Misc
+#execute_on_song_change=.config/ncmpcpp/notify_on_change

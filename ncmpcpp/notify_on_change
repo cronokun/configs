@@ -1,0 +1,12 @@
+#!/bin/bash
+
+mpd_host=volumio.local
+track_title="$(MPD_HOST=$mpd_host mpc --format %title% current)"
+track_artist_and_album="$(MPD_HOST=$mpd_host mpc --format '%artist% — %album%' current)"
+file_path="$(MPD_HOST=$mpd_host mpc --format %file% current)"
+cover_path=~/.cache/ncmpcpp/cover.jpg
+
+# curl --silent "http://volumio.local/albumart?path=$file_path" -o "$cover_path"
+
+terminal-notifier -title "$track_title" -subtitle "$track_artist_and_album" -message "" -group "ncmpcpp" -sender com.apple.automator.ncmpcpp
+# -contentImage "$cover_path" 
